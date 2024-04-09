@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  app:
+    container_name: mscusersbackend
+    image: mscusers_img
+    build: ./
+    volumes:
+     - /data/mcs/reto-tecnico-max-leon:/data/mcs/reto-tecnico-max-leon
+    ##cpus: 0.3
+    ##cpuset: '0'
+    restart: unless-stopped
+    ##mem_limit: '2048m'
+    ports:
+      - "1006:8080"
+    networks:
+      - mscusersbackend
+
+networks:
+  mscpricebackend:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet:  127.27.0.0/16
+

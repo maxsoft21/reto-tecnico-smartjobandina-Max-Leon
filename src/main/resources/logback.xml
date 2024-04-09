@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- All log files located in logs file of the project -->
+    <property name="LOGS" value="/data/mcs/reto-tecnico-smartjobandina-max-leon/logs" />
+
+    <!-- Define the console log format -->
+    <appender name="Console"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %green(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable
+            </Pattern>
+        </layout>
+    </appender>
+
+    <appender name="RollingFileByDate" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}/reto-tecnico-smartjobandina-max-leon.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${LOGS}/reto-tecnico-smartjobandina-max-leon_%d{dd-MM-yyyy}.log
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <!-- LOG everything at error level -->
+    <root level="INFO">
+        <appender-ref ref="RollingFileByDate" />
+        <appender-ref ref="Console" />
+    </root>
+
+</configuration>
